@@ -1,0 +1,28 @@
+body {
+  background: url(./images/lavender.png);
+  height: 60vh;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.topBox {
+  border: 5px solid white;
+  border-radius: 20px;
+  padding: 80px;
+  margin-bottom: 50px;
+}
+
+.buttons button {
+  background: none;
+  border: 2px solid palegoldenrod;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+}
