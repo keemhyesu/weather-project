@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "AlumniSansCollegiateOne-Italic";
+  src: url(../src/Fonts/AlumniSansCollegiateOne-Italic.ttf);
+}
+
+@font-face {
+  font-family: "comfortaa";
+  src: url(../src/Fonts/Comfortaa-VariableFont_wght.ttf);
+}
 body {
   background: url(./images/lavender.png);
   height: 60vh;
@@ -16,6 +25,7 @@ body {
   border-radius: 20px;
   padding: 80px;
   margin-bottom: 50px;
+  font-family: "comfortaa";
 }
 
 .outer {
@@ -31,6 +41,7 @@ body {
   cursor: pointer;
   padding: 10px;
   margin: 10px;
+  font-family: "comfortaa";
 }
 
 .buttons button:hover {
