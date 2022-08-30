@@ -1,12 +1,13 @@
 import React from "react";
 
-const CityButtons = () => {
+const CityButtons = ({ cities }) => {
+  console.log("cities?", cities);
   return (
     <div className="buttons">
       <button>현재 위치</button>
-      <button>서울</button>
-      <button>런던</button>
-      <button>뉴욕</button>
+      {cities.map((item) => (
+        <button>{item}</button>
+      ))}
     </div>
   );
 };

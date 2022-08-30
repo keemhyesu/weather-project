@@ -12,19 +12,30 @@ import CityButtons from "./component/CityButtons";
 //6. 데이터를 들고 오는동안 로딩스피너가 돈다
 
 function App() {
+  const [weather, setWeather] = useState(null);
+  const cities = ["paris", "new york", "london", "bangkok"]; // 데이터가 만약에 천개..오천개일때 수작업으로 버튼 바꿀 수 없으니 배열 만들고 map 돌린다!!
+
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
+      let cityName = position.coords.cityName;
       callApi(lat, lon);
+      callCityWeather(cityName);
     });
   };
 
   const callApi = async (lat, lon) => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=47aea59812fff51f357ac9c028580eea`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=47aea59812fff51f357ac9c028580eea&units=metric`;
     let response = await fetch(url);
     let data = await response.json();
-    console.log("data", data);
+    setWeather(data);
+  };
+
+  const callCityWeather = async (cityName) => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=cb6b93df34f8ae8af2fb64657dc2b65e`;
+    let response = await fetch(url);
+    let data = await response.json();
   };
 
   useEffect(() => {
@@ -34,8 +45,8 @@ function App() {
   return (
     <div>
       <div className="container">
-        <Box />
-        <CityButtons />
+        <Box weather={weather} />
+        <CityButtons cities={cities} />
       </div>
     </div>
   );
