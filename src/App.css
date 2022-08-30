@@ -18,11 +18,21 @@ body {
   margin-bottom: 50px;
 }
 
+.outer {
+  border: 3px solid beige;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .buttons button {
   background: none;
-  border: 2px solid palegoldenrod;
+  border: 5px solid palegoldenrod;
   border-radius: 5px;
   cursor: pointer;
   padding: 10px;
   margin: 10px;
+}
+
+.buttons button:hover {
+  color: white;
 }

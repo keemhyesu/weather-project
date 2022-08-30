@@ -3,6 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Box from "./component/Box";
 import CityButtons from "./component/CityButtons";
+import { RotatingLines } from "react-loader-spinner";
 
 //1. 앱 실행 => 현재 위치 기반 날씨를 보여줌
 //2. 날씨 정보에는 도시,섭씨,화씨 날씨상태
@@ -13,8 +14,10 @@ import CityButtons from "./component/CityButtons";
 
 function App() {
   const [weather, setWeather] = useState(null);
-  const cities = ["paris", "new york", "london", "bangkok"]; // 데이터가 만약에 천개..오천개일때 수작업으로 버튼 바꿀 수 없으니 배열 만들고 map 돌린다!!
+  const cities = ["PARIS", "NEW YORK", "LONDON", "BANGKOK"]; // 데이터가 만약에 천개..오천개일때 수작업으로 버튼 바꿀 수 없으니 배열 만들고 map 돌린다!!
   const [city, setCity] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [error, setError] = useState("");
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -25,17 +28,39 @@ function App() {
   };
 
   const callApi = async (lat, lon) => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=47aea59812fff51f357ac9c028580eea&units=metric`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
+    try {
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=47aea59812fff51f357ac9c028580eea&units=metric`;
+      setVisible(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+      setVisible(false);
+    } catch (err) {
+      setError(err.message);
+      setVisible(false);
+    }
   };
 
   const getWeatherByCity = async () => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=47aea59812fff51f357ac9c028580eea&units=metric`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
+    try {
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=47aea59812fff51f357ac9c028580eea&units=metric`;
+      setVisible(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+      setVisible(false);
+    } catch (err) {
+      setError(err.message);
+      setVisible(false);
+    }
+  };
+
+  const handleCityChange = (city) => {
+    if (city === "current") {
+      setCity(null);
+    } else {
+      setCity(city);
+    }
   };
 
   useEffect(() => {
@@ -48,10 +73,28 @@ function App() {
 
   return (
     <div>
-      <div className="container">
-        <Box weather={weather} />
-        <CityButtons cities={cities} setCity={setCity} />
-      </div>
+      {visible ? (
+        <div className="container">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={visible}
+          />
+        </div>
+      ) : !error ? (
+        <div className="container">
+          <Box weather={weather} />
+          <CityButtons
+            cities={cities}
+            setCity={setCity}
+            handleCityChange={handleCityChange}
+          />
+        </div>
+      ) : (
+        error
+      )}
     </div>
   );
 }
