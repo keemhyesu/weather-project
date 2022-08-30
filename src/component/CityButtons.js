@@ -1,17 +1,14 @@
 import React from "react";
 
-const CityButtons = ({ cities, setCity, handleCityChange }) => {
+const CityButtons = ({ cities, setCity }) => {
   console.log("cities?", cities);
   return (
-    <div className="outer">
-      <div className="buttons">
-        <button onClick={() => handleCityChange("current")}>current</button>
-        {cities.map((item, index) => (
-          <button key={index} onClick={() => setCity(item)}>
-            {item}
-          </button>
-        ))}
-      </div>
+    <div className="buttons">
+      {cities.map((item, index) => (
+        <button key={index} onClick={() => setCity(item)}>
+          {item}
+        </button>
+      ))}
     </div>
   );
 };
