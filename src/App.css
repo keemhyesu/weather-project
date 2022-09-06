@@ -11,6 +11,7 @@
 body {
   background: url(./images/lavender.png);
   height: 60vh;
+  font-family: "comfortaa";
 }
 
 .container {
@@ -23,7 +24,7 @@ body {
 
 .outer {
   border: 9px solid white;
-  padding: 50px;
+  padding: 100px;
 }
 
 .buttons {
@@ -40,6 +41,7 @@ body {
   border-radius: 5px;
   border: 7px solid #f6e2b9;
   cursor: pointer;
+  font-family: "comfortaa";
 }
 
 button:hover {
