@@ -6,7 +6,7 @@ import { MagnifyingGlass } from "react-loader-spinner";
 
 const App = () => {
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState("Location");
+  const [city, setCity] = useState(null);
   const cities = ["Paris", "New york", "London", "Bangkok"];
   const [visible, setVisible] = useState(false);
 
@@ -25,7 +25,6 @@ const App = () => {
     let data = await response.json();
     setWeather(data);
     setVisible(false);
-    console.log("data", data);
   };
 
   const citiesWeather = async () => {
@@ -35,7 +34,6 @@ const App = () => {
     let data = await response.json();
     setWeather(data);
     setVisible(false);
-    console.log("data", data);
   };
 
   useEffect(() => {

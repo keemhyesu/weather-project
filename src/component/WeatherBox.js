@@ -1,6 +1,7 @@
 import React from "react";
 
 const WeatherBox = ({ weather }) => {
+  console.log("엥", weather);
   return (
     <div className="outer">
       <h1>{weather?.name}</h1>

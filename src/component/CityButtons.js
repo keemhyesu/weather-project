@@ -1,7 +1,6 @@
 import React from "react";
 
 const CityButtons = ({ cities, setCity, handleCityChange }) => {
-  console.log("cities?", setCity);
   return (
     <div className="buttons">
       <button onClick={() => handleCityChange("current")}>
