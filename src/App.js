@@ -6,7 +6,7 @@ import { MagnifyingGlass } from "react-loader-spinner";
 
 const App = () => {
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Location");
   const cities = ["Paris", "New york", "London", "Bangkok"];
   const [visible, setVisible] = useState(false);
 
@@ -39,12 +39,20 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (city === "") {
+    if (city == null) {
       getCurrentLocation();
     } else {
       citiesWeather();
     }
   }, [city]);
+
+  const handleCityChange = (city) => {
+    if (city === "current") {
+      setCity(null);
+    } else {
+      setCity(city);
+    }
+  };
 
   return (
     <>
@@ -63,7 +71,11 @@ const App = () => {
         ) : (
           <div className="container">
             <WeatherBox weather={weather} />
-            <CityButtons cities={cities} setCity={setCity} />
+            <CityButtons
+              cities={cities}
+              handleCityChange={handleCityChange}
+              setCity={city}
+            />
           </div>
         )}
       </div>
